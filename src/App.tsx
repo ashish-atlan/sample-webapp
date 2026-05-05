@@ -7,12 +7,11 @@ const STATUS_LABEL: Record<'waiting' | 'ready' | 'logged-out', string> = {
   'logged-out': 'Session ended',
 };
 
+const POWER_BI_URL =
+  'https://app.powerbi.com/reportEmbed?reportId=037e5f93-8fbe-4ffa-b80c-033c5c7195bb&appId=8238c489-96b1-46d6-b305-4bbecb277c90&autoAuth=true&ctid=3596192b-fdf5-4e2c-a6fa-acb706c963d8';
+
 export function App() {
   const { username, assetId, status } = useAtlanContext();
-  const waiting = status === 'waiting';
-
-  const placeholder = (fallback: string) =>
-    waiting ? '— waiting for handshake —' : fallback;
 
   return (
     <main className="app">
@@ -27,41 +26,47 @@ export function App() {
         <span className={`pill pill--${status}`}>{STATUS_LABEL[status]}</span>
       </header>
 
-      <section className="card" aria-label="Context from Atlan">
-        <div className="card__header">Context from parent</div>
-        <dl className="fields">
-          <div className="field">
-            <dt className="field__label">Username</dt>
-            <dd
-              className={
-                username
-                  ? 'field__value'
-                  : 'field__value field__value--placeholder'
-              }
-            >
-              {username ?? placeholder('—')}
-            </dd>
-          </div>
-          <div className="field">
-            <dt className="field__label">Asset ID</dt>
-            <dd
-              className={
-                assetId
-                  ? 'field__value field__value--mono'
-                  : 'field__value field__value--placeholder'
-              }
-            >
-              {assetId ??
-                placeholder('(no asset context — open from an asset profile tab)')}
-            </dd>
-          </div>
-        </dl>
-      </section>
+      {status === 'waiting' && (
+        <section className="card" aria-label="Waiting for handshake">
+          <div className="card__header">Waiting</div>
+          <div className="card__body">— waiting for handshake —</div>
+        </section>
+      )}
 
-      <p className="footer">
-        Reads <code>user.username</code> and <code>page.params.id</code> from{' '}
-        <code>ATLAN_AUTH_CONTEXT</code>.
-      </p>
+      {status === 'logged-out' && (
+        <section className="card" aria-label="Session ended">
+          <div className="card__header">Session ended</div>
+          <div className="card__body">The parent app has signed out.</div>
+        </section>
+      )}
+
+      {status === 'ready' && (
+        <>
+          <div className="status-strip">
+            <span className="status-strip__item">
+              <span className="status-strip__label">Signed in as</span>
+              <span className="status-strip__value">{username ?? '—'}</span>
+            </span>
+            {assetId && (
+              <span className="status-strip__item">
+                <span className="status-strip__label">Asset</span>
+                <span className="status-strip__value status-strip__value--mono">
+                  {assetId}
+                </span>
+              </span>
+            )}
+          </div>
+          <section className="card" aria-label="Power BI report">
+            <iframe
+              className="report-frame"
+              src={POWER_BI_URL}
+              title="Power BI report"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </section>
+        </>
+      )}
     </main>
   );
 }
