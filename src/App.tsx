@@ -11,7 +11,7 @@ const POWER_BI_URL =
   'https://app.powerbi.com/reportEmbed?reportId=037e5f93-8fbe-4ffa-b80c-033c5c7195bb&appId=8238c489-96b1-46d6-b305-4bbecb277c90&autoAuth=true&ctid=3596192b-fdf5-4e2c-a6fa-acb706c963d8';
 
 export function App() {
-  const { username, assetId, status } = useAtlanContext();
+  const { status } = useAtlanContext();
 
   return (
     <main className="app">
@@ -41,31 +41,15 @@ export function App() {
       )}
 
       {status === 'ready' && (
-        <>
-          <div className="status-strip">
-            <span className="status-strip__item">
-              <span className="status-strip__label">Signed in as</span>
-              <span className="status-strip__value">{username ?? '—'}</span>
-            </span>
-            {assetId && (
-              <span className="status-strip__item">
-                <span className="status-strip__label">Asset</span>
-                <span className="status-strip__value status-strip__value--mono">
-                  {assetId}
-                </span>
-              </span>
-            )}
-          </div>
-          <section className="card" aria-label="Power BI report">
-            <iframe
-              className="report-frame"
-              src={POWER_BI_URL}
-              title="Power BI report"
-              allowFullScreen
-              referrerPolicy="strict-origin-when-cross-origin"
-            />
-          </section>
-        </>
+        <section className="card" aria-label="Power BI report">
+          <iframe
+            className="report-frame"
+            src={POWER_BI_URL}
+            title="Power BI report"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+        </section>
       )}
     </main>
   );
