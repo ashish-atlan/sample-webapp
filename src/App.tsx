@@ -17,11 +17,25 @@ export function App() {
     <main className="app">
       <header className="header">
         <div className="title">
-          <div className="logo" aria-hidden="true">A</div>
-          <div>
-            <span className="subtitle">Embedded App</span>
-            <h1>Atlan UI Embedding Test</h1>
+          <div className="logo" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M4 4v16h16" />
+              <rect x="8" y="13" width="2.5" height="5" />
+              <rect x="12" y="10" width="2.5" height="8" />
+              <rect x="16" y="7" width="2.5" height="11" />
+              <polyline points="7,15 11,11 15,12 19,6" />
+            </svg>
           </div>
+          <h1>Metaview</h1>
         </div>
         <span className={`pill pill--${status}`}>{STATUS_LABEL[status]}</span>
       </header>
