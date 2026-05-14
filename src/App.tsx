@@ -8,7 +8,7 @@ const STATUS_LABEL: Record<'waiting' | 'ready' | 'logged-out', string> = {
 };
 
 const POWER_BI_URL =
-  'https://app.powerbi.com/reportEmbed?reportId=037e5f93-8fbe-4ffa-b80c-033c5c7195bb&appId=8238c489-96b1-46d6-b305-4bbecb277c90&autoAuth=true&ctid=3596192b-fdf5-4e2c-a6fa-acb706c963d8';
+  'https://app.powerbi.com/reportEmbed?reportId=037e5f93-8fbe-4ffa-b80c-033c5c7195bb&appId=8238c489-96b1-46d6-b305-4bbecb277c90&autoAuth=true&ctid=3596192b-fdf5-4e2c-a6fa-acb706c963d8&navContentPaneEnabled=true&filterPaneEnabled=false';
 
 export function App() {
   const { status } = useAtlanContext();
