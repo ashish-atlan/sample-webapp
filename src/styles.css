@@ -209,6 +209,25 @@ body {
   border: 0;
 }
 
+.report-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--atlan-indigo);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.report-link:hover {
+  background: var(--atlan-indigo-deep);
+}
+
 .footer {
   margin-top: 16px;
   font-size: 0.75rem;
