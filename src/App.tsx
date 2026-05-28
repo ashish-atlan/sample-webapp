@@ -62,12 +62,12 @@ export function App() {
         </section>
       )}
 
-      /* Iframe embedding — kept for reference, commented out in favor of link-out. */
+      {/* Iframe embedding — kept for reference, commented out in favor of link-out. */}
       {status === 'ready' && (
         <section className="card" aria-label="Power BI report">
           <iframe
             className="report-frame"
-            src={POWER_BI_URL}
+            src={POWER_BI_APP_URL}
             title="Power BI report"
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
