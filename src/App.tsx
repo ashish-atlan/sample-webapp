@@ -62,7 +62,6 @@ export function App() {
         </section>
       )}
 
-      {/* Iframe embedding — kept for reference, commented out in favor of link-out. */}
       {status === 'ready' && (
         <section className="card" aria-label="Power BI report">
           <iframe
@@ -76,7 +75,7 @@ export function App() {
       )}
       
 
-      {status === 'ready' && (
+      {/* {status === 'ready' && (
         <section className="card" aria-label="Power BI report">
           <div className="card__header">Power BI report</div>
           <div className="card__body">
@@ -91,7 +90,7 @@ export function App() {
             </a>
           </div>
         </section>
-      )}
+      )} */}
     </main>
   );
 }
