@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import { allowedOrigins } from './env';
-import type { AtlanContextStatus, AtlanInboundMessage } from './types';
+import type { AtlanContextStatus, AtlanInboundMessage, AtlanUser } from './types';
 
 type State = {
   username: string | null;
+  user: AtlanUser | null;
   assetId: string | null;
   status: AtlanContextStatus;
 };
 
 const initialState: State = {
   username: null,
+  user: null,
   assetId: null,
   status: 'waiting',
 };
@@ -36,13 +38,14 @@ export function useAtlanContext(): State {
           return;
         }
         case 'ATLAN_AUTH_CONTEXT': {
-          const username = data.payload?.user?.username ?? null;
+          const user = data.payload?.user ?? null;
+          const username = user?.username ?? null;
           const assetId = firstString(data.payload?.page?.params?.id);
-          setState({ username, assetId, status: 'ready' });
+          setState({ username, user, assetId, status: 'ready' });
           return;
         }
         case 'ATLAN_LOGOUT': {
-          setState({ username: null, assetId: null, status: 'logged-out' });
+          setState({ username: null, user: null, assetId: null, status: 'logged-out' });
           return;
         }
       }
